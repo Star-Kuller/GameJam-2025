@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      siren_2_front_0: -7325461789333198882
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

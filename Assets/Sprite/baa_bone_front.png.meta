@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      baa_bone_front_0: -2363891429382483278
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

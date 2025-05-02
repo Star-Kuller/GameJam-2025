@@ -26,8 +26,7 @@ public class HPInfo : MonoBehaviour
     void Start()
     {
         death.SetActive(false);
-        //int maxHP = _playerService.maxHealth;
-        maxHP = 13;
+        int maxHP = _playerService.MaxHealth;
         int currentHP = _playerService.Health;
         HPVisual();
     }
