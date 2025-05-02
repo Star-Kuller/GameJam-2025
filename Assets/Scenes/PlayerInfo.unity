@@ -277,7 +277,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 19292117}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 251899537}
+        m_TargetAssemblyTypeName: SwapStage, Assembly-CSharp
+        m_MethodName: OnHuntButtonClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &19292117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,6 +579,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 251899536}
+  - component: {fileID: 251899537}
   m_Layer: 0
   m_Name: Script
   m_TagString: Untagged
@@ -589,6 +602,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &251899537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 251899534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b58f2e3af0ea07e46adbf08b694526fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageStage1: {fileID: 1127552265}
+  imageStage2: {fileID: 133873863}
+  imageStage3: {fileID: 307429486}
+  mirror: {fileID: 1391730221}
+  butHunt: {fileID: 19292115}
+  itemTransform: {fileID: 364387153}
+  textTransform: {fileID: 804136907}
+  textSkill: {fileID: 2025857625}
+  spriteSpoon: {fileID: 7553835203902197830, guid: 87df96a77a5d41441bfe1cf82e6c9c66, type: 3}
+  spriteChicken: {fileID: -2363891429382483278, guid: 33f10ed7dbfed094baf1cba3a453cee7, type: 3}
+  spriteMan: {fileID: -7325461789333198882, guid: 27f34932561403442bc0b2e56b55df81, type: 3}
+  huntAudioSource: {fileID: 1788009952}
+  huntSoundStage1: {fileID: 8300000, guid: dae55f8143caa8e47b7a40a68a2c69cb, type: 3}
+  huntSoundStage2: {fileID: 0}
+  huntSoundStage3: {fileID: 8300000, guid: 3a87e95d6ac84ec47ae7b4221fb2f58a, type: 3}
 --- !u!1 &307429484
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,6 +1489,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   headmanBar: {fileID: 11807202}
   infHead: {fileID: 1737690471}
+  death: {fileID: 2067315465}
 --- !u!1 &901416891
 GameObject:
   m_ObjectHideFlags: 0
@@ -2832,8 +2873,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: dae55f8143caa8e47b7a40a68a2c69cb, type: 3}
+  m_Resource: {fileID: 8300000, guid: dae55f8143caa8e47b7a40a68a2c69cb, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -3072,6 +3113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healtBar: {fileID: 602634412}
   infHealth: {fileID: 1687308868}
+  death: {fileID: 1462768184}
 --- !u!1 &1943140588
 GameObject:
   m_ObjectHideFlags: 0

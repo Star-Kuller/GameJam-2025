@@ -1,6 +1,6 @@
 using UnityEngine;
 using Zenject;
-using Gameplay.PlayerEvolves;
+using Gameplay;
 
 public class Inventory : MonoBehaviour
 {
@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private GameObject chicken;
     [SerializeField] private GameObject man;
 
-    private IPlayerEvolve currentEvolve;
+    private PlayerEvolve currentEvolve;
     private int quantity;
 
     private PlayerService _playerService;
@@ -23,10 +23,10 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         // Получаем текущую стадию
-        currentEvolve = _playerService.CurrentEvolve();
+        currentEvolve = _playerService.CurrentEvolve;
 
         // Получаем количество предметов
-        quantity = _playerService.QuantityItem();
+        quantity = _playerService.Items;
 
         AddItem();
     }
@@ -44,13 +44,13 @@ public class Inventory : MonoBehaviour
         // Определяем, какой предмет показывать в зависимости от стадии
         switch (currentEvolve.Evolve)
         {
-            case PlayerEvolve.Igosha:
+            case Evolve.Igosha:
                 prefabToSpawn = spoon;
                 break;
-            case PlayerEvolve.Kikimora:
+            case Evolve.Kikimora:
                 prefabToSpawn = chicken;
                 break;
-            case PlayerEvolve.WhiteHag:
+            case Evolve.WhiteHag:
                 prefabToSpawn = man;
                 break;
         }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Gameplay.PlayerEvolves;
+using Gameplay;
 using Zenject;
 using System.Collections;
 using UnityEngine.SceneManagement;
@@ -25,7 +25,7 @@ public class SwapStage : MonoBehaviour
     [SerializeField] private AudioClip huntSoundStage3;
 
     private PlayerService _playerService;
-    private IPlayerEvolve _currentEvolve;
+    private PlayerEvolve _currentEvolve;
     private int quantityItem;
 
     [Inject]
@@ -36,8 +36,8 @@ public class SwapStage : MonoBehaviour
 
     void Start()
     {
-        _currentEvolve = _playerService.CurrentEvolve; // получаем интерфейс
-        quantityItem = _playerService.quantityItem();   // 
+        _currentEvolve = _playerService.CurrentEvolve; 
+        quantityItem = _playerService.Items;    
 
         Swap();
     }
@@ -49,7 +49,7 @@ public class SwapStage : MonoBehaviour
 
         switch (_currentEvolve.Evolve)
         {
-            case PlayerEvolve.Igosha:
+            case Evolve.Igosha:
                 anchored.x = -635;
                 mirror.anchoredPosition = anchored;
                 butHunt.anchoredPosition = anchored;
@@ -63,7 +63,7 @@ public class SwapStage : MonoBehaviour
                 huntAudioSource.clip = huntSoundStage1;
                 break;
 
-            case PlayerEvolve.Kikimora:
+            case Evolve.Kikimora:
                 anchored.x = 0;
                 mirror.anchoredPosition = anchored;
                 butHunt.anchoredPosition = anchored;
@@ -77,7 +77,7 @@ public class SwapStage : MonoBehaviour
                 huntAudioSource.clip = huntSoundStage2;
                 break;
 
-            case PlayerEvolve.WhiteHag:
+            case Evolve.WhiteHag:
                 anchored.x = 635;
                 mirror.anchoredPosition = anchored;
                 butHunt.anchoredPosition = anchored;
@@ -110,16 +110,18 @@ public class SwapStage : MonoBehaviour
 
     public void OnHuntButtonClicked()
     {
+        huntAudioSource.Play();
+        Debug.Log("Звук");
         StartCoroutine(HuntWithDelay());
     }
 
     private IEnumerator HuntWithDelay()
     {
        
-        huntAudioSource.Play();
+        
         
         yield return new WaitForSeconds(3f);
 
-        SceneManager.LoadScene(3); 
+        SceneManager.LoadScene(2); 
     }
 }

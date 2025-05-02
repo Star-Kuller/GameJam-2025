@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Gameplay;
 using Zenject;
 
 
@@ -25,8 +26,9 @@ public class HPInfo : MonoBehaviour
     void Start()
     {
         death.SetActive(false);
-        int maxHP = _playerService.MaxHP;
-        int currentHP = _playerService.CurrentHP;
+        //int maxHP = _playerService.maxHealth;
+        maxHP = 13;
+        int currentHP = _playerService.Health;
         HPVisual();
     }
 

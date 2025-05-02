@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Gameplay;
 using Zenject;
 
 public class HeadmanInfo : MonoBehaviour
@@ -25,7 +26,7 @@ public class HeadmanInfo : MonoBehaviour
     {
         death.SetActive(false);
         maxHead = 100;
-        int curHead = _playerService.curHead;
+        int curHead = _playerService.Attention;
         
 
         HeadmanVisual();
