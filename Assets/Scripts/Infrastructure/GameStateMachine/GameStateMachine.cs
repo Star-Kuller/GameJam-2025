@@ -29,7 +29,8 @@ namespace Infrastructure
                 //Сюда добавляем все состояния игры
                 [typeof(BootstrapState)] = _stateFactory.CreateState<BootstrapState>(),
                 [typeof(TestState)] = _stateFactory.CreateState<TestState>(),
-                [typeof(VillageState)] = _stateFactory.CreateState<VillageState>()
+                [typeof(VillageState)] = _stateFactory.CreateState<VillageState>(),
+                [typeof(DeadState)] = _stateFactory.CreateState<DeadState>(),
             };
             await Enter<BootstrapState>();
         }

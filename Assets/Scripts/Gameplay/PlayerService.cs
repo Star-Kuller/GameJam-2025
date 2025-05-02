@@ -1,33 +1,41 @@
 using System;
-using Gameplay.PlayerEvolves;
-using Zenject;
+using Cysharp.Threading.Tasks;
+using Infrastructure;
+using Infrastructure.States;
+using UnityEngine;
 
 namespace Gameplay
 {
     public class PlayerService
     {
-        private readonly DiContainer _container;
-        public PlayerService(DiContainer container)
-        {
-            _container = container;
-        }
+        private readonly GameStateMachine _stateMachine;
+        public int Health { get; private set; }
+        public int Attention { get; private set; }
+        public int Items { get; private set; }
+        public PlayerEvolve CurrentEvolve { get; private set; }
         
-        private IPlayerEvolve CurrentEvolve { get; set; }
 
-        public void ChangeState(PlayerEvolve evolve)
+        public async UniTask HomeVisit(EnemyType type)
         {
-            switch (evolve)
+            var effect = CurrentEvolve.GetEnemyEffect(type);
+            Health -= effect.damage;
+            Attention += effect.attention;
+            if (Health <= 0 || Attention >= CurrentEvolve.MaxAttention)
+                await _stateMachine.Enter<DeadState>();
+            Items += effect.items;
+        }
+
+        public void ChangeState(Evolve evolve)
+        {
+            CurrentEvolve = evolve switch
             {
-                case PlayerEvolve.Igosha:
-                    CurrentEvolve = _container.Resolve<Igosha>();
-                    break;
-                case PlayerEvolve.Kikimora:
-                    break;
-                case PlayerEvolve.WhiteHag:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(evolve), evolve, null);
-            }
+                Evolve.Igosha => Resources.Load<PlayerEvolve>("Igosha"),
+                Evolve.Kikimora => Resources.Load<PlayerEvolve>("Kikimora"),
+                Evolve.WhiteHag => Resources.Load<PlayerEvolve>("WhiteHag"),
+                _ => throw new ArgumentOutOfRangeException(nameof(evolve), evolve, null)
+            };
+            Health += CurrentEvolve.MaxHealth;
+            Items = 0;
         }
     }
 }
