@@ -1,6 +1,6 @@
-namespace Gameplay.PlayerEvolves
+namespace Gameplay
 {
-    public enum PlayerEvolve
+    public enum Evolve
     {
         Igosha,   // Игоша
         Kikimora, // Кикимора

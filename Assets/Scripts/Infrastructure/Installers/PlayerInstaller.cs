@@ -1,6 +1,4 @@
 using Gameplay;
-using Gameplay.Inventory;
-using Gameplay.PlayerEvolves;
 using Zenject;
 
 namespace Infrastructure.Installers
@@ -11,9 +9,8 @@ namespace Infrastructure.Installers
         //Тут регистрируются различные системы связанные с игроком (ХП, управление и прочее)
         public override void InstallBindings()
         {
-            Container.Bind<InventoryService>().AsSingle().NonLazy();
             Container.Bind<PlayerService>().AsSingle().NonLazy();
-            Container.Bind<Igosha>().AsTransient();
+            Container.Bind<PlayerEvolve>().AsTransient();
         }
     }
 }

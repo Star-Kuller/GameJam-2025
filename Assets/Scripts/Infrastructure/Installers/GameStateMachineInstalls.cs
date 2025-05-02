@@ -20,6 +20,7 @@ namespace Infrastructure.Installers
             Container.Bind<BootstrapState>().AsSingle().NonLazy();
             Container.Bind<TestState>().AsSingle().NonLazy();
             Container.Bind<VillageState>().AsSingle().NonLazy();
+            Container.Bind<DeadState>().AsSingle().NonLazy();
         }
     }
 }
