@@ -4,7 +4,7 @@ using Infrastructure;
 using Infrastructure.States;
 using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.Player
 {
     public class PlayerService
     {
@@ -36,7 +36,7 @@ namespace Gameplay
             {
                 Evolve.Igosha => Resources.Load<PlayerEvolve>("Igosha"),
                 Evolve.Kikimora => Resources.Load<PlayerEvolve>("Kikimora"),
-                Evolve.WhiteHag => Resources.Load<PlayerEvolve>("WhiteHag"),
+                Evolve.WhiteHag => Resources.Load<PlayerEvolve>(""),
                 _ => throw new ArgumentOutOfRangeException(nameof(evolve), evolve, null)
             };
             Health += CurrentEvolve.MaxHealth;

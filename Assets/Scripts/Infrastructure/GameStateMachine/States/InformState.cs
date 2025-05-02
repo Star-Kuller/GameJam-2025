@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Gameplay;
+using Gameplay.Player;
 
 namespace Infrastructure.States
 {

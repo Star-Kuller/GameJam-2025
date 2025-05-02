@@ -1,4 +1,5 @@
 using Gameplay;
+using Gameplay.Player;
 using Zenject;
 
 namespace Infrastructure.Installers

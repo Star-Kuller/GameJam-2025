@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Gameplay
+namespace Gameplay.Player
 {
     [CreateAssetMenu(fileName = "Evolve", menuName = "Player/Evolve", order = 0)]
     public class PlayerEvolve : ScriptableObject
@@ -11,14 +11,7 @@ namespace Gameplay
         [SerializeField] private int maxAttention;
         [SerializeField] private int targetItemCount;
         [SerializeField] private PlayerSkillBase skill;
-        [SerializeField] private EnemyEffect[] enemyEffects = 
-        {
-            new() { type = EnemyType.Child },
-            new() { type = EnemyType.Man },
-            new() { type = EnemyType.Woman },
-            new() { type = EnemyType.Grandpa },
-            new() { type = EnemyType.Grandma }
-        };
+        [SerializeField] private EnemyEffect[] enemyEffects;
         
         public Evolve Evolve => evolve;
         public int MaxHealth => maxHealth;

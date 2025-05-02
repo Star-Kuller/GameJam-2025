@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Gameplay;
+using Gameplay.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
