@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Gameplay;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Infrastructure.States
 {
@@ -20,6 +21,18 @@ namespace Infrastructure.States
         {
             Debug.Log("Инициализация игры...");
             _playerService.ChangeEvolve(Evolve.Igosha);
+#if UNITY_EDITOR
+            var currentScene = SceneManager.GetActiveScene();
+            switch (currentScene.name)
+            {
+                case "Village":
+                    await _stateMachine.Enter<VillageState>();
+                    return;
+                case "PlayerInfo":
+                    await _stateMachine.Enter<InformState>();
+                    return;
+            }
+#endif
             await _stateMachine.Enter<VillageState>();
         }
     }
