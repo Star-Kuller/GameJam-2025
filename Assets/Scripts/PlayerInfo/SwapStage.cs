@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Gameplay.PlayerEvolves;
+using Zenject;
+using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class SwapStage : MonoBehaviour
 {
@@ -15,121 +19,107 @@ public class SwapStage : MonoBehaviour
     [SerializeField] private Sprite spriteSpoon;
     [SerializeField] private Sprite spriteChicken;
     [SerializeField] private Sprite spriteMan;
-    private int currentStage;
+    [SerializeField] private AudioSource huntAudioSource;
+    [SerializeField] private AudioClip huntSoundStage1;
+    [SerializeField] private AudioClip huntSoundStage2;
+    [SerializeField] private AudioClip huntSoundStage3;
+
+    private PlayerService _playerService;
+    private IPlayerEvolve _currentEvolve;
     private int quantityItem;
+
+    [Inject]
+    public void Construct(PlayerService playerService)
+    {
+        _playerService = playerService;
+    }
 
     void Start()
     {
-        // Тут нужно взять значение текущей стадии
-        currentStage = 1;
-        // Тут нужно взять значение количества собраных предметов
-        quantityItem = 2;
-        CheckStage();
-    }
+        _currentEvolve = _playerService.CurrentEvolve; // получаем интерфейс
+        quantityItem = _playerService.quantityItem();   // 
 
-    void CheckStage()
-    {
-        if (currentStage == 1 && quantityItem >= 5)
-        {
-            currentStage++;
-            Swap();
-        }
-        else if (currentStage == 2 && quantityItem >= 8)
-        {
-            currentStage++;
-            Swap();
-        }
-        else if(currentStage == 3 && quantityItem >= 11)
-        {
-            currentStage++;
-            Swap();
-        }
-        else
-        {
-            Swap();
-        }
-
+        Swap();
     }
 
     void Swap()
     {
-        if (currentStage == 1)
+        // Сначала определяем смещение зеркала по стадии
+        Vector2 anchored = mirror.anchoredPosition;
+
+        switch (_currentEvolve.Evolve)
         {
-            Vector2 anchoredM = mirror.anchoredPosition;
-            anchoredM.x = -635;
-            mirror.anchoredPosition = anchoredM;
+            case PlayerEvolve.First:
+                anchored.x = -635;
+                mirror.anchoredPosition = anchored;
+                butHunt.anchoredPosition = anchored;
 
-            Vector2 anchoredH = mirror.anchoredPosition;
-            anchoredH.x = -635;
-            mirror.anchoredPosition = anchoredH;
+                itemTransform.sprite = spriteSpoon;
+                textTransform.text = "Собери 5 ложек для трансформации.";
+                textSkill.text = "Ты еще мала и не обладаешь особыми способностями...";
 
-            itemTransform.sprite = spriteSpoon;
-            textTransform.text = "Собери 5 ложек для трансформации.";
-            textSkill.text = "Ты еще мала и не обладаешь особыми способностями...";
+                SetStageAlpha(1f, 0.5f, 0.5f);
 
-            Color c1 = imageStage1.color;
-            c1.a = 1f;
-            imageStage1.color = c1;
+                huntAudioSource.clip = huntSoundStage1;
+                break;
 
-            Color c2 = imageStage2.color;
-            c2.a = 0.5f;
-            imageStage1.color = c2;
+            case PlayerEvolve.Second:
+                anchored.x = 0;
+                mirror.anchoredPosition = anchored;
+                butHunt.anchoredPosition = anchored;
 
-            Color c3 = imageStage3.color;
-            c3.a = 0.5f;
-            imageStage1.color = c3;
+                itemTransform.sprite = spriteChicken;
+                textTransform.text = "Укради 8 куриц для трансформации.";
+                textSkill.text = "Теперь ты умеешь отвлекать жителей.";
+
+                SetStageAlpha(0.5f, 1f, 0.5f);
+
+                huntAudioSource.clip = huntSoundStage2;
+                break;
+
+            case PlayerEvolve.Third:
+                anchored.x = 635;
+                mirror.anchoredPosition = anchored;
+                butHunt.anchoredPosition = anchored;
+
+                itemTransform.sprite = spriteMan;
+                textTransform.text = "Приворожи 11 мужчин для победы.";
+                textSkill.text = "Теперь ты чувствуешь кто находится в доме.";
+
+                SetStageAlpha(0.5f, 0.5f, 1f);
+
+                huntAudioSource.clip = huntSoundStage3;
+                break;
         }
-        else if (currentStage == 2)
-        {
-            Vector2 anchoredM = mirror.anchoredPosition;
-            anchoredM.x = 0;
-            mirror.anchoredPosition = anchoredM;
+    }
 
-            Vector2 anchoredH = mirror.anchoredPosition;
-            anchoredH.x = 0;
-            mirror.anchoredPosition = anchoredH;
+    void SetStageAlpha(float a1, float a2, float a3)
+    {
+        Color c1 = imageStage1.color;
+        c1.a = a1;
+        imageStage1.color = c1;
 
-            itemTransform.sprite = spriteChicken;
-            textTransform.text = "Укради 8 куриц для трансформации.";
-            textSkill.text = "Теперь ты умеешь отвлекать жителей.";
+        Color c2 = imageStage2.color;
+        c2.a = a2;
+        imageStage2.color = c2;
 
-            Color c1 = imageStage1.color;
-            c1.a = 0.5f;
-            imageStage1.color = c1;
+        Color c3 = imageStage3.color;
+        c3.a = a3;
+        imageStage3.color = c3;
+    }
 
-            Color c2 = imageStage2.color;
-            c2.a = 1f;
-            imageStage1.color = c2;
+    public void OnHuntButtonClicked()
+    {
+        StartCoroutine(HuntWithDelay());
+    }
 
-            Color c3 = imageStage3.color;
-            c3.a = 0.5f;
-            imageStage1.color = c3;
-        }
-        else
-        {
-            Vector2 anchoredM = mirror.anchoredPosition;
-            anchoredM.x = 635;
-            mirror.anchoredPosition = anchoredM;
+    private IEnumerator HuntWithDelay()
+    {
+       
+        huntAudioSource.Play();
+        
+        yield return new WaitForSeconds(3f);
 
-            Vector2 anchoredH = mirror.anchoredPosition;
-            anchoredH.x = 635;
-            mirror.anchoredPosition = anchoredH;
-
-            itemTransform.sprite = spriteMan;
-            textTransform.text = "Приворожи 11 мужчин для победы.";
-            textSkill.text = "Теперь ты чувствуешь кто находится в доме.";
-
-            Color c1 = imageStage1.color;
-            c1.a = 0.5f;
-            imageStage1.color = c1;
-
-            Color c2 = imageStage2.color;
-            c2.a = 0.5f;
-            imageStage1.color = c2;
-
-            Color c3 = imageStage3.color;
-            c3.a = 1f;
-            imageStage1.color = c3;
-        }
+        SceneManager.LoadScene(3); 
     }
 }

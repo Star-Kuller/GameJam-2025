@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Zenject;
 
 public class HeadmanInfo : MonoBehaviour
 {
@@ -11,12 +12,21 @@ public class HeadmanInfo : MonoBehaviour
     private int curHead;
     private float percentHead;
 
+    private PlayerService _playerService;
+
+
+    [Inject]
+    public void Construct(PlayerService playerService)
+    {
+        _playerService = playerService;
+    }
+
     void Start()
     {
         death.SetActive(false);
         maxHead = 100;
-        // Тут нужно взять значение текущего внимания старосты
-        curHead = 66;
+        int curHead = _playerService.curHead;
+        
 
         HeadmanVisual();
     }

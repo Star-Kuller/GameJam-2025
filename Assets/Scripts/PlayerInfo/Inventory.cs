@@ -1,50 +1,63 @@
 using UnityEngine;
+using Zenject;
+using Gameplay.PlayerEvolves;
 
 public class Inventory : MonoBehaviour
 {
-    public Transform inventoryPosition;
-    public GameObject spoon;
-    public GameObject chicken;
-    public GameObject man;
+    [SerializeField] private Transform inventoryPosition;
+    [SerializeField] private GameObject spoon;
+    [SerializeField] private GameObject chicken;
+    [SerializeField] private GameObject man;
+
+    private IPlayerEvolve currentEvolve;
     private int quantity;
-    private int stage;
+
+    private PlayerService _playerService;
+
+    [Inject]
+    public void Construct(PlayerService playerService)
+    {
+        _playerService = playerService;
+    }
 
     void Start()
     {
-        //Тут нужно взять текущую стадию
-        stage = 1;
-        //Тут нужно взять текущее количество предметов
-        quantity = 3;
+        // Получаем текущую стадию
+        currentEvolve = _playerService.CurrentEvolve();
+
+        // Получаем количество предметов
+        quantity = _playerService.QuantityItem();
+
         AddItem();
     }
 
     void AddItem()
     {
+        // Очищаем предыдущие предметы
         foreach (Transform child in inventoryPosition)
         {
             Destroy(child.gameObject);
         }
 
-        if (stage == 1)
+        GameObject prefabToSpawn = null;
+
+        // Определяем, какой предмет показывать в зависимости от стадии
+        switch (currentEvolve.Evolve)
         {
-            for (int i = 0; i < quantity; i++)
-            {
-                GameObject item = Instantiate(spoon, inventoryPosition);
-            }
+            case PlayerEvolve.First:
+                prefabToSpawn = spoon;
+                break;
+            case PlayerEvolve.Second:
+                prefabToSpawn = chicken;
+                break;
+            case PlayerEvolve.Third:
+                prefabToSpawn = man;
+                break;
         }
-        else if (stage == 2)
+
+        for (int i = 0; i < quantity; i++)
         {
-            for (int i = 0; i < quantity; i++)
-            {
-                GameObject item = Instantiate(chicken, inventoryPosition);
-            }
-        }
-        else
-        {
-            for (int i = 0; i < quantity; i++)
-            {
-                GameObject item = Instantiate(man, inventoryPosition);
-            }
+            Instantiate(prefabToSpawn, inventoryPosition);
         }
     }
 }
