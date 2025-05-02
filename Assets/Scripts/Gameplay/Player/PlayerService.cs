@@ -30,6 +30,8 @@ namespace Gameplay.Player
             Items += effect.items;
         }
 
+        public event Action<Evolve> OnEvolveChanged;
+
         public void ChangeEvolve(Evolve evolve)
         {
             CurrentEvolve = evolve switch
@@ -42,7 +44,9 @@ namespace Gameplay.Player
             Health += CurrentEvolve.MaxHealth;
             MaxHealth = Health;
             Items = 0;
-            
+
+            OnEvolveChanged?.Invoke(evolve);
+
             Debug.Log($"Игрок перешёл на этап {evolve} HP: {Health/MaxHealth} Внимание: {Attention/CurrentEvolve.MaxAttention}");
         }
     }
