@@ -44,13 +44,13 @@ public class Inventory : MonoBehaviour
         // Определяем, какой предмет показывать в зависимости от стадии
         switch (currentEvolve.Evolve)
         {
-            case PlayerEvolve.First:
+            case PlayerEvolve.Igosha:
                 prefabToSpawn = spoon;
                 break;
-            case PlayerEvolve.Second:
+            case PlayerEvolve.Kikimora:
                 prefabToSpawn = chicken;
                 break;
-            case PlayerEvolve.Third:
+            case PlayerEvolve.WhiteHag:
                 prefabToSpawn = man;
                 break;
         }

@@ -49,7 +49,7 @@ public class SwapStage : MonoBehaviour
 
         switch (_currentEvolve.Evolve)
         {
-            case PlayerEvolve.First:
+            case PlayerEvolve.Igosha:
                 anchored.x = -635;
                 mirror.anchoredPosition = anchored;
                 butHunt.anchoredPosition = anchored;
@@ -63,7 +63,7 @@ public class SwapStage : MonoBehaviour
                 huntAudioSource.clip = huntSoundStage1;
                 break;
 
-            case PlayerEvolve.Second:
+            case PlayerEvolve.Kikimora:
                 anchored.x = 0;
                 mirror.anchoredPosition = anchored;
                 butHunt.anchoredPosition = anchored;
@@ -77,7 +77,7 @@ public class SwapStage : MonoBehaviour
                 huntAudioSource.clip = huntSoundStage2;
                 break;
 
-            case PlayerEvolve.Third:
+            case PlayerEvolve.WhiteHag:
                 anchored.x = 635;
                 mirror.anchoredPosition = anchored;
                 butHunt.anchoredPosition = anchored;
