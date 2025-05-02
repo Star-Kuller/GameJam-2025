@@ -6,12 +6,10 @@ namespace Infrastructure.States
 {
     public class DeadState : IState
     {
-        private readonly GameStateMachine _stateMachine;
         private readonly PlayerService _playerService;
 
-        public DeadState(GameStateMachine stateMachine, PlayerService playerService)
+        public DeadState(PlayerService playerService)
         {
-            _stateMachine = stateMachine;
             _playerService = playerService;
         }
         

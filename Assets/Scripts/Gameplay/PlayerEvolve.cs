@@ -23,6 +23,7 @@ namespace Gameplay
         public Evolve Evolve => evolve;
         public int MaxHealth => maxHealth;
         public int MaxAttention => maxAttention;
+        public int TargetItemCount => targetItemCount;
         
         public EnemyEffect GetEnemyEffect(EnemyType type)
         {
