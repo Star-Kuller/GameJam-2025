@@ -19,6 +19,7 @@ namespace Infrastructure.Installers
             //Тут нужно регистрировать состояния игры
             Container.Bind<BootstrapState>().AsSingle().NonLazy();
             Container.Bind<TestState>().AsSingle().NonLazy();
+            Container.Bind<VillageState>().AsSingle().NonLazy();
         }
     }
 }

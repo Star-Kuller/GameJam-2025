@@ -8,7 +8,7 @@ namespace Infrastructure
     public interface IExitableState : IState
     {
         /// <summary>
-        /// Это метод вызывается при выходе из состояние
+        /// Это метод вызывается при выходе из состояния
         /// </summary>
         UniTask OnExit();
     }
