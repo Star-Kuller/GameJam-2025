@@ -5,6 +5,7 @@ using Gameplay;
 public class MusicManager : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip Menu;
     [SerializeField] private AudioClip igoshaClip;
     [SerializeField] private AudioClip kikimoraClip;
     [SerializeField] private AudioClip whiteHagClip;
@@ -21,6 +22,9 @@ public class MusicManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        audioSource.clip = Menu;
+        audioSource.Play();
+
     }
 
     private void Start()
