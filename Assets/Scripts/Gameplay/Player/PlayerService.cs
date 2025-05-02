@@ -36,7 +36,7 @@ namespace Gameplay.Player
             {
                 Evolve.Igosha => Resources.Load<PlayerEvolve>("Igosha"),
                 Evolve.Kikimora => Resources.Load<PlayerEvolve>("Kikimora"),
-                Evolve.WhiteHag => Resources.Load<PlayerEvolve>(""),
+                Evolve.WhiteHag => Resources.Load<PlayerEvolve>("WhiteHag"),
                 _ => throw new ArgumentOutOfRangeException(nameof(evolve), evolve, null)
             };
             Health += CurrentEvolve.MaxHealth;
