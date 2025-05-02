@@ -28,7 +28,8 @@ namespace Infrastructure
             {
                 //Сюда добавляем все состояния игры
                 [typeof(BootstrapState)] = _stateFactory.CreateState<BootstrapState>(),
-                [typeof(TestState)] = _stateFactory.CreateState<TestState>()
+                [typeof(TestState)] = _stateFactory.CreateState<TestState>(),
+                [typeof(VillageState)] = _stateFactory.CreateState<VillageState>()
             };
             await Enter<BootstrapState>();
         }
@@ -41,7 +42,9 @@ namespace Infrastructure
         {
             if(_currentState is IExitableState exitableState) 
                 await exitableState.OnExit();
+            Debug.Log($"--------Покинуто состояние {_currentState.GetType().Name}----------");
             _currentState = _states[typeof(T)];
+            Debug.Log($"--------Вход в состояние {_currentState.GetType().Name}----------");
             await _currentState.OnEnter();
         }
     }
