@@ -10,7 +10,6 @@ namespace Infrastructure.Installers
         public override void InstallBindings()
         {
             Container.Bind<PlayerService>().AsSingle().NonLazy();
-            Container.Bind<PlayerEvolve>().AsTransient();
         }
     }
 }
