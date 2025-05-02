@@ -28,8 +28,8 @@ namespace Infrastructure
             {
                 //Сюда добавляем все состояния игры
                 [typeof(BootstrapState)] = _stateFactory.CreateState<BootstrapState>(),
-                [typeof(TestState)] = _stateFactory.CreateState<TestState>(),
                 [typeof(VillageState)] = _stateFactory.CreateState<VillageState>(),
+                [typeof(InformState)] = _stateFactory.CreateState<InformState>(),
                 [typeof(DeadState)] = _stateFactory.CreateState<DeadState>(),
             };
             await Enter<BootstrapState>();
@@ -39,11 +39,13 @@ namespace Infrastructure
         /// Это метод перехода в другое состояние
         /// </summary>
         /// <typeparam name="T">Целевое состояние</typeparam>
-        public async UniTask Enter<T>()
+        public async UniTask Enter<T>() 
+            where T : IState
         {
             if(_currentState is IExitableState exitableState) 
                 await exitableState.OnExit();
-            Debug.Log($"--------Покинуто состояние {_currentState.GetType().Name}----------");
+            if(_currentState != null) 
+                Debug.Log($"--------Покинуто состояние {_currentState.GetType().Name}----------");
             _currentState = _states[typeof(T)];
             Debug.Log($"--------Вход в состояние {_currentState.GetType().Name}----------");
             await _currentState.OnEnter();

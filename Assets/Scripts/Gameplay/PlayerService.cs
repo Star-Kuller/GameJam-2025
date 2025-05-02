@@ -10,12 +10,17 @@ namespace Gameplay
     {
         private readonly GameStateMachine _stateMachine;
         public int Health { get; private set; }
+        public int MaxHealth { get; private set; }
         public int Attention { get; private set; }
         public int Items { get; private set; }
         public PlayerEvolve CurrentEvolve { get; private set; }
-        
 
-        public async UniTask HomeVisit(EnemyType type)
+        public PlayerService(GameStateMachine gameStateMachine)
+        {
+            _stateMachine = gameStateMachine;
+        }
+        
+        public async UniTask VisitHome(EnemyType type)
         {
             var effect = CurrentEvolve.GetEnemyEffect(type);
             Health -= effect.damage;
@@ -25,7 +30,7 @@ namespace Gameplay
             Items += effect.items;
         }
 
-        public void ChangeState(Evolve evolve)
+        public void ChangeEvolve(Evolve evolve)
         {
             CurrentEvolve = evolve switch
             {
@@ -35,7 +40,10 @@ namespace Gameplay
                 _ => throw new ArgumentOutOfRangeException(nameof(evolve), evolve, null)
             };
             Health += CurrentEvolve.MaxHealth;
+            MaxHealth = Health;
             Items = 0;
+            
+            Debug.Log($"Игрок перешёл на этап {evolve} HP: {Health/MaxHealth} Внимание: {Attention/CurrentEvolve.MaxAttention}");
         }
     }
 }

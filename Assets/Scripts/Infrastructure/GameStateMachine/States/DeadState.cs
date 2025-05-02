@@ -15,12 +15,13 @@ namespace Infrastructure.States
             _playerService = playerService;
         }
         
-        public async UniTask OnEnter()
+        public UniTask OnEnter()
         {
             if(_playerService.Health <= 0) 
                 Debug.Log("Игрок погиб");
             if(_playerService.Attention <= 0)
                 Debug.Log("Староста проявил к игроку слишком много внимания");
+            return UniTask.CompletedTask;
         }
     }
 }
