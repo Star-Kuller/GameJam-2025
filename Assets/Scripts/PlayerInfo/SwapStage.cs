@@ -26,7 +26,6 @@ public class SwapStage : MonoBehaviour
 
     private PlayerService _playerService;
     private PlayerEvolve _currentEvolve;
-    private int quantityItem;
 
     [Inject]
     public void Construct(PlayerService playerService)
@@ -36,20 +35,34 @@ public class SwapStage : MonoBehaviour
 
     void Start()
     {
-        _currentEvolve = _playerService.CurrentEvolve; 
-        quantityItem = _playerService.Items;    
-
+        Debug.Log("Start");
+        
+        Debug.Log("Перед определением стадии");
+        
+        if (_playerService.CurrentEvolve == null)
+        {
+            Debug.Log("change");
+            _playerService.ChangeEvolve(Evolve.WhiteHag); // или другая стадия для теста
+        }
+        else
+        {
+            Debug.Log("not change");
+            _currentEvolve = _playerService.CurrentEvolve;
+        }
+            Debug.Log("Предсвап");
         Swap();
     }
 
     void Swap()
     {
+        Debug.Log("swap");
         // Сначала определяем смещение зеркала по стадии
         Vector2 anchored = mirror.anchoredPosition;
 
         switch (_currentEvolve.Evolve)
         {
             case Evolve.Igosha:
+                Debug.Log(1);
                 anchored.x = -635;
                 mirror.anchoredPosition = anchored;
                 butHunt.anchoredPosition = anchored;
@@ -64,6 +77,7 @@ public class SwapStage : MonoBehaviour
                 break;
 
             case Evolve.Kikimora:
+                Debug.Log(2);
                 anchored.x = 0;
                 mirror.anchoredPosition = anchored;
                 butHunt.anchoredPosition = anchored;
@@ -78,6 +92,7 @@ public class SwapStage : MonoBehaviour
                 break;
 
             case Evolve.WhiteHag:
+                Debug.Log(3);
                 anchored.x = 635;
                 mirror.anchoredPosition = anchored;
                 butHunt.anchoredPosition = anchored;
@@ -122,6 +137,6 @@ public class SwapStage : MonoBehaviour
         
         yield return new WaitForSeconds(3f);
 
-        SceneManager.LoadScene(2); 
+        SceneManager.LoadScene(1); 
     }
 }
