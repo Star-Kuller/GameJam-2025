@@ -32,6 +32,12 @@ namespace Gameplay
 
         public bool IsPlaying => _audioSource.isPlaying;
 
+        public void Stop()
+        {
+            if (_audioSource.isPlaying)
+                _audioSource.Stop();
+        }
+
         public void PlayClipForEvolve(Evolve evolve)
         {
             var clip = evolve switch

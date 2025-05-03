@@ -34,6 +34,12 @@ namespace Infrastructure.States
                 case "PlayerInfo":
                     await _stateMachine.Enter<InformState>();
                     return;
+                case "Menu":
+                    await _stateMachine.Enter<MenuState>();
+                    return;
+                case "End":
+                    await _stateMachine.Enter<WinEndingState>();
+                    return;
             }
 #endif
             await _stateMachine.Enter<VillageState>();
