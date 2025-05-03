@@ -21,6 +21,10 @@ namespace Infrastructure.Installers
             Container.Bind<VillageState>().AsSingle();
             Container.Bind<InformState>().AsSingle();
             Container.Bind<DeadState>().AsSingle();
+            Container.Bind<MenuState>().AsSingle();
+            Container.Bind<WinEndingState>().AsSingle();
+            Container.Bind<HPEndingState>().AsSingle();
+            Container.Bind<HeadEndingState>().AsSingle();
         }
     }
 }

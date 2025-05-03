@@ -62,6 +62,7 @@ namespace Gameplay.PlayerInfo
                 
                 anchored.x = -635;
                 mirror.anchoredPosition = anchored;
+                anchored.y = 50;
                 butHunt.anchoredPosition = anchored;
 
                 itemTransform.sprite = stage.spriteItem;
@@ -82,7 +83,7 @@ namespace Gameplay.PlayerInfo
             //await UniTask.WaitUntil(() => !_huntAudioSource.isPlaying);
             
             // А это переход через 3 секунды (3000 миллисекунд)
-            await UniTask.Delay(3000);
+            await UniTask.Delay(2500);
             await _stateMachine.Enter<VillageState>();
         }
     }

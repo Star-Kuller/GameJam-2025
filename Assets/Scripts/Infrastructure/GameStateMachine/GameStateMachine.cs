@@ -31,6 +31,10 @@ namespace Infrastructure
                 [typeof(VillageState)] = _stateFactory.CreateState<VillageState>(),
                 [typeof(InformState)] = _stateFactory.CreateState<InformState>(),
                 [typeof(DeadState)] = _stateFactory.CreateState<DeadState>(),
+                [typeof(MenuState)] = _stateFactory.CreateState<MenuState>(),
+                [typeof(WinEndingState)] = _stateFactory.CreateState<WinEndingState>(),
+                [typeof(HPEndingState)] = _stateFactory.CreateState<HPEndingState>(),
+                [typeof(HeadEndingState)] = _stateFactory.CreateState<HeadEndingState>(),
             };
             await Enter<BootstrapState>();
         }
