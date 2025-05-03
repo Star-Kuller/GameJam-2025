@@ -1,7 +1,11 @@
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using Gameplay;
 using Gameplay.Player;
+using Gameplay.PlayerInfo;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace Infrastructure.States
 {
@@ -14,13 +18,37 @@ namespace Infrastructure.States
             _playerService = playerService;
         }
         
-        public UniTask OnEnter()
+        public async UniTask OnEnter()
         {
-            if(_playerService.Health <= 0) 
+            await SceneManager.LoadSceneAsync("PlayerInfo");
+            var deadScreenManager = GetSceneContainer().TryResolve<DeadScreenManager>();
+            if (deadScreenManager != null)
+            {
+                deadScreenManager.HeadmanDeadScreen.SetActive(false);
+                deadScreenManager.HpDeadScreen.SetActive(false);
+            }
+            else
+                Debug.LogWarning("DeadScreenManager не найден!");
+
+            if (_playerService.Health <= 0)
+            {
                 Debug.Log("Игрок погиб");
-            if(_playerService.Attention <= 0)
+                deadScreenManager.HpDeadScreen.SetActive(true);
+            }
+
+            if (_playerService.Attention <= 0)
+            {
                 Debug.Log("Староста проявил к игроку слишком много внимания");
-            return UniTask.CompletedTask;
+                deadScreenManager.HeadmanDeadScreen.SetActive(true);
+            }
+        }
+        
+        private DiContainer GetSceneContainer()
+        {
+            var scene = SceneManager.GetActiveScene();
+            var sceneContext = scene.GetRootGameObjects()
+                .First(x => x.name == "SceneContext");
+            return sceneContext.GetComponent<SceneContext>().Container;
         }
     }
 }

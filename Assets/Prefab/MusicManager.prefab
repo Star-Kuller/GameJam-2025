@@ -45,11 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b204408a5161c4194a94c6921380e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 2859566785071149550}
-  Menu: {fileID: 8300000, guid: a6b87cd1110f1094294f5966165c4623, type: 3}
-  igoshaClip: {fileID: 8300000, guid: 41a01ba511f8a7945b1301f419da0a75, type: 3}
-  kikimoraClip: {fileID: 8300000, guid: 41a01ba511f8a7945b1301f419da0a75, type: 3}
-  whiteHagClip: {fileID: 8300000, guid: 41a01ba511f8a7945b1301f419da0a75, type: 3}
+  menuTheme: {fileID: 8300000, guid: a6b87cd1110f1094294f5966165c4623, type: 3}
+  igoshaTheme: {fileID: 8300000, guid: 41a01ba511f8a7945b1301f419da0a75, type: 3}
+  kikimoraTheme: {fileID: 8300000, guid: 41a01ba511f8a7945b1301f419da0a75, type: 3}
+  whiteHagTheme: {fileID: 8300000, guid: 41a01ba511f8a7945b1301f419da0a75, type: 3}
 --- !u!82 &2859566785071149550
 AudioSource:
   m_ObjectHideFlags: 0
@@ -59,7 +58,7 @@ AudioSource:
   m_GameObject: {fileID: 5387455673583598870}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4036692188204138716, guid: 8d2080c3a49958346b26230696bfb1c1, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1

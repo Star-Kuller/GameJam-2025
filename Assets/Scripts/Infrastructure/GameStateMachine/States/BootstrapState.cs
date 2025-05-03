@@ -10,11 +10,13 @@ namespace Infrastructure.States
     {
         private readonly GameStateMachine _stateMachine;
         private readonly PlayerService _playerService;
+        private readonly MusicManager _musicManager;
 
-        public BootstrapState(GameStateMachine stateMachine, PlayerService playerService)
+        public BootstrapState(GameStateMachine stateMachine, PlayerService playerService, MusicManager musicManager)
         {
             _stateMachine = stateMachine;
             _playerService = playerService;
+            _musicManager = musicManager;
         }
         
         //Это начальное состояние, тут прописываем всё что нужно сделать перед стартом основной игры
