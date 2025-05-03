@@ -21,7 +21,8 @@ namespace Infrastructure.States
         public async UniTask OnEnter()
         {
             await SceneManager.LoadSceneAsync("PlayerInfo");
-            var deadScreenManager = GetSceneContainer().TryResolve<DeadScreenManager>();
+            var sceneContainer = SceneManager.GetActiveScene().GetSceneContainer();
+            var deadScreenManager = sceneContainer.TryResolve<DeadScreenManager>();
             if (deadScreenManager != null)
             {
                 deadScreenManager.HeadmanDeadScreen.SetActive(false);
@@ -41,14 +42,6 @@ namespace Infrastructure.States
                 Debug.Log("Староста проявил к игроку слишком много внимания");
                 deadScreenManager.HeadmanDeadScreen.SetActive(true);
             }
-        }
-        
-        private DiContainer GetSceneContainer()
-        {
-            var scene = SceneManager.GetActiveScene();
-            var sceneContext = scene.GetRootGameObjects()
-                .First(x => x.name == "SceneContext");
-            return sceneContext.GetComponent<SceneContext>().Container;
         }
     }
 }

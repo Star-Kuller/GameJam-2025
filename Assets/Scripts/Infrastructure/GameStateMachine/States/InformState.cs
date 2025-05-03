@@ -27,7 +27,8 @@ namespace Infrastructure.States
                 NextEvolve();
             await SceneManager.LoadSceneAsync("PlayerInfo");
             _musicManager.PlayClipForEvolve(_playerService.CurrentEvolve.Evolve);
-            var deadScreenManager = GetSceneContainer().Resolve<DeadScreenManager>();
+            var sceneContainer = SceneManager.GetActiveScene().GetSceneContainer();
+            var deadScreenManager = sceneContainer.Resolve<DeadScreenManager>();
             if (deadScreenManager != null)
             {
                 deadScreenManager.HeadmanDeadScreen.SetActive(false);
@@ -52,14 +53,6 @@ namespace Infrastructure.States
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-        private DiContainer GetSceneContainer()
-        {
-            var scene = SceneManager.GetActiveScene();
-            var sceneContext = scene.GetRootGameObjects()
-                .First(x => x.name == "SceneContext");
-            return sceneContext.GetComponent<SceneContext>().Container;
         }
     }
 }
