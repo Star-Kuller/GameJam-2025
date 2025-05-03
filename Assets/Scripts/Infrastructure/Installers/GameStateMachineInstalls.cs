@@ -23,7 +23,7 @@ namespace Infrastructure.Installers
             Container.Bind<DeadState>().AsSingle();
             Container.Bind<MenuState>().AsSingle();
             Container.Bind<WinEndingState>().AsSingle();
-            Container.Bind<HPEndingState>().AsSingle();
+            Container.Bind<HpEndingState>().AsSingle();
             Container.Bind<HeadEndingState>().AsSingle();
         }
     }

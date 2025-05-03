@@ -33,7 +33,7 @@ namespace Infrastructure
                 [typeof(DeadState)] = _stateFactory.CreateState<DeadState>(),
                 [typeof(MenuState)] = _stateFactory.CreateState<MenuState>(),
                 [typeof(WinEndingState)] = _stateFactory.CreateState<WinEndingState>(),
-                [typeof(HPEndingState)] = _stateFactory.CreateState<HPEndingState>(),
+                [typeof(HpEndingState)] = _stateFactory.CreateState<HpEndingState>(),
                 [typeof(HeadEndingState)] = _stateFactory.CreateState<HeadEndingState>(),
             };
             await Enter<BootstrapState>();

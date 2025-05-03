@@ -42,7 +42,7 @@ public class StartButtonHandler : MonoBehaviour
         introDisplay.gameObject.SetActive(true);
         introPlayer.Play();
 
-        await UniTask.Delay(51110);
+        await UniTask.WaitUntil(() => !introPlayer.isPlaying);
 
         await _stateMachine.Enter<VillageState>();
     }

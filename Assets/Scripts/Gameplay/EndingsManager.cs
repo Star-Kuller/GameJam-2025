@@ -1,42 +1,45 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Video;
 using Zenject;
 
-public class EndingsManager : MonoBehaviour
+namespace Gameplay
 {
-    [SerializeField] VideoPlayer winPlayer;
-    [SerializeField] VideoPlayer loseHPPlayer;
-    [SerializeField] VideoPlayer loseHeadPlayer;
-
-    VideoPlayer _current;
-
-    [Inject]
-    public void Construct() {  }
-
-    public void PlayWin()
+    public class EndingsManager : MonoBehaviour
     {
-        Debug.Log("ÏëåéÂèí ");
-        Play(winPlayer);
-    }
+        [SerializeField] VideoPlayer winPlayer;
+        [SerializeField] VideoPlayer loseHpPlayer;
+        [SerializeField] VideoPlayer loseHeadPlayer;
 
-    public void PlayHP()
-    {
-        Play(loseHPPlayer);
-    }
+        VideoPlayer _current;
 
-    public void PlayHead()
-    {
-        Play(loseHeadPlayer);
-    }
+        [Inject]
+        public void Construct() {  }
 
-    void Play(VideoPlayer vp)
-    {
-        
-        //if (_current != null && _current.isPlaying)
-           // _current.Stop();
-           Debug.Log("Ñòàðò âèäåî " + vp);
-        _current = vp;
-        _current.gameObject.SetActive(true);
-        _current.Play();
+        public async UniTask PlayWin()
+        {
+            Debug.Log("ÐŸÐ»ÐµÐ¹Ð’Ð¸Ð½ ");
+            await Play(winPlayer);
+        }
+
+        public async UniTask PlayHP()
+        {
+            await Play(loseHpPlayer);
+        }
+
+        public async UniTask PlayHead()
+        {
+            await Play(loseHeadPlayer);
+        }
+
+        private async UniTask Play(VideoPlayer vp)
+        {
+            Debug.Log("Ð¡Ñ‚Ð°Ñ€Ñ‚ Ð²Ð¸Ð´ÐµÐ¾ " + vp);
+            _current = vp;
+            _current.gameObject.SetActive(true);
+            _current.Play();
+            await UniTask.WaitUntil(() => !_current.isPlaying);
+        }
     }
 }

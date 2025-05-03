@@ -1,6 +1,5 @@
 using Cysharp.Threading.Tasks;
 using Gameplay;
-using Gameplay.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,6 +19,5 @@ namespace Infrastructure.States
             await SceneManager.LoadSceneAsync("Menu");
             _musicManager.PlayMenuTheme();
         }
-        public UniTask OnExit() => UniTask.CompletedTask;
     }
 }

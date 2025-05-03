@@ -1,12 +1,15 @@
-using Zenject;
 using UnityEngine;
+using Zenject;
 
-public class MenuInstaller : MonoInstaller
+namespace Infrastructure.Installers
 {
-    [SerializeField] private StartButtonHandler _startButtonHandler;
-
-    public override void InstallBindings()
+    public class MenuInstaller : MonoInstaller
     {
-        Container.Inject(_startButtonHandler);
+        [SerializeField] private StartButtonHandler startButtonHandler;
+
+        public override void InstallBindings()
+        {
+            Container.Inject(startButtonHandler);
+        }
     }
 }

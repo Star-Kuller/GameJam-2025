@@ -1,18 +1,22 @@
+using Gameplay;
 using UnityEngine;
 using Zenject;
 
-public class EndingsSceneInstaller : MonoInstaller
+namespace Infrastructure.Installers
 {
-    [SerializeField] EndingsManager _endingsManager;
-
-    public override void InstallBindings()
+    public class EndingsSceneInstaller : MonoInstaller
     {
+        [SerializeField] EndingsManager endingsManager;
 
-        Container.Bind<EndingsManager>()
-                 .FromInstance(_endingsManager)
-                 .AsSingle()
-                 .NonLazy();
+        public override void InstallBindings()
+        {
+
+            Container.Bind<EndingsManager>()
+                .FromInstance(endingsManager)
+                .AsSingle()
+                .NonLazy();
 
 
+        }
     }
 }
