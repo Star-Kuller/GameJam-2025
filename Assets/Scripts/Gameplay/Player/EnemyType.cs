@@ -6,6 +6,6 @@ namespace Gameplay.Player
         Grandpa, // Дед
         Man,     // Мужик
         Woman,   // Женщина
-        Grandma  // Бабка
+        Grandma, // Бабка
     }
 }

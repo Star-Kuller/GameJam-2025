@@ -10,11 +10,24 @@ namespace Gameplay.Player
     public class PlayerService
     {
         private readonly GameStateMachine _stateMachine;
-        public int Health { get; private set; }
+        private int _health;
+        private int _attention;
+
         public int MaxHealth { get; private set; }
-        public int Attention { get; private set; }
         public int Items { get; private set; }
         public PlayerEvolve CurrentEvolve { get; private set; }
+        
+        public int Health
+        {
+            get => _health;
+            private set => _health = value < 0 ? 0 : value;
+        }
+        
+        public int Attention
+        {
+            get => _attention;
+            private set => _attention = value > 100 ? 100 : value;
+        }
 
         public PlayerService(GameStateMachine gameStateMachine)
         {

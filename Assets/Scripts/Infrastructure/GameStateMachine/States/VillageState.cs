@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Gameplay;
 using Gameplay.Player;
+using Gameplay.Village;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +20,9 @@ namespace Infrastructure.States
         {
             await SceneManager.LoadSceneAsync("Village");
             _musicManager.PlayClipForEvolve(_playerService.CurrentEvolve.Evolve);
+            var container = SceneManager.GetActiveScene().GetSceneContainer();
+            var houseManager = container.Resolve<HouseManager>();
+            houseManager.InitializeHouses();
         }
     }
 }
