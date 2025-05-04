@@ -10,8 +10,8 @@ namespace Gameplay.PlayerInfo
     {
         [SerializeField] private Image headmanBar;
         [SerializeField] private TextMeshProUGUI infHead;
-        private int _maxAttention;
-        private int _attention;
+        private float _maxAttention;
+        private float _attention;
         
         private PlayerService _playerService;
 
@@ -31,7 +31,8 @@ namespace Gameplay.PlayerInfo
         private void HeadmanVisual()
         {
             var percentHead = _attention / _maxAttention;
-            infHead.text = _attention.ToString();    
+            infHead.text = _attention.ToString(); 
+            Debug.Log(percentHead);
             headmanBar.fillAmount = percentHead;
         }
     }

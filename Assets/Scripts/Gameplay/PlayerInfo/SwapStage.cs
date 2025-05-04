@@ -49,7 +49,7 @@ namespace Gameplay.PlayerInfo
 
         private void Swap()
         {
-            // ������� ���������� �������� ������� �� ������
+            
             var anchored = mirror.anchoredPosition;
 
             foreach (var stage in stages)
@@ -59,8 +59,11 @@ namespace Gameplay.PlayerInfo
                 stage.image.color = color;
                 
                 if (stage.evolve != _currentEvolve) continue;
-                
-                anchored.x = -635;
+
+                int evolveIndex = (int)_currentEvolve;
+                float offsetX = (evolveIndex - 1) * 635f; // -1 → -635, 0 → 0, 1 → +635
+
+                anchored.x = offsetX;
                 mirror.anchoredPosition = anchored;
                 anchored.y = 50;
                 butHunt.anchoredPosition = anchored;

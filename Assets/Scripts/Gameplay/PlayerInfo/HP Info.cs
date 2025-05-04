@@ -10,8 +10,8 @@ namespace Gameplay.PlayerInfo
     {
         [SerializeField] private Image healthBar;
         [SerializeField] private TextMeshProUGUI healthText;
-        private int _maxHealth;
-        private int _health;
+        private float _maxHealth;
+        private float _health;
 
         private PlayerService _playerService;
         
@@ -32,6 +32,7 @@ namespace Gameplay.PlayerInfo
         {
             var percentHp = _health / _maxHealth;
             healthText.text = _health.ToString();
+            Debug.Log(percentHp);
             healthBar.fillAmount = percentHp;
         }
     }
