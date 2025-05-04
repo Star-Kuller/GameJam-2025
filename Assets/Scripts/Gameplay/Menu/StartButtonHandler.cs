@@ -15,6 +15,7 @@ public class StartButtonHandler : MonoBehaviour
 {
     [SerializeField] private Button startButton;
     [SerializeField] private Button nextButton;
+    [SerializeField] private Button exitButton;
     [SerializeField] private VideoPlayer introPlayer;
     [SerializeField] private RawImage introDisplay;
     private GameStateMachine _stateMachine;
@@ -34,6 +35,7 @@ public class StartButtonHandler : MonoBehaviour
         introPlayer.isLooping = false;
         startButton.onClick.AddListener(OnStartClicked);
         nextButton.onClick.AddListener(OnNextClicked);
+        exitButton.onClick.AddListener(OnExitClicked);
     }
 
     private async void OnStartClicked()
@@ -54,5 +56,11 @@ public class StartButtonHandler : MonoBehaviour
     {
         
         await _stateMachine.Enter<VillageState>();
+    }
+
+    private async void OnExitClicked()
+    {
+
+        Application.Quit();
     }
 }
