@@ -18,12 +18,12 @@ MonoBehaviour:
   usageLimit: 3
   enemyPortraits:
   - enemyType: 0
-    sprite: {fileID: 946972, guid: f7ae1ff65846a5344be9fdb8d3a7e39b, type: 3}
+    sprite: {fileID: -2490964520405508894, guid: f7ae1ff65846a5344be9fdb8d3a7e39b, type: 3}
   - enemyType: 1
-    sprite: {fileID: -1212302912720742140, guid: f7ae1ff65846a5344be9fdb8d3a7e39b, type: 3}
+    sprite: {fileID: -2490964520405508894, guid: f7ae1ff65846a5344be9fdb8d3a7e39b, type: 3}
   - enemyType: 2
     sprite: {fileID: -2490964520405508894, guid: f7ae1ff65846a5344be9fdb8d3a7e39b, type: 3}
   - enemyType: 3
     sprite: {fileID: -543935646835040482, guid: f7ae1ff65846a5344be9fdb8d3a7e39b, type: 3}
   - enemyType: 4
-    sprite: {fileID: -5163084957519484460, guid: f7ae1ff65846a5344be9fdb8d3a7e39b, type: 3}
+    sprite: {fileID: -543935646835040482, guid: f7ae1ff65846a5344be9fdb8d3a7e39b, type: 3}
