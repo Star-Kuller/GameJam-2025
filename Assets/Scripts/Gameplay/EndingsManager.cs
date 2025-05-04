@@ -14,10 +14,15 @@ namespace Gameplay
         [SerializeField] VideoPlayer loseHpPlayer;
         [SerializeField] VideoPlayer loseHeadPlayer;
         private GameStateMachine _stateMachine;
+        private MusicManager _musicManager;
         VideoPlayer _current;
 
         [Inject]
-        public void Construct(GameStateMachine stateMachine) { _stateMachine = stateMachine; }
+        public void Construct(GameStateMachine stateMachine, MusicManager musicManager)
+        { 
+            _stateMachine = stateMachine;
+            _musicManager = musicManager;
+        }
 
         public async UniTask PlayWin()
         {//49
@@ -37,6 +42,8 @@ namespace Gameplay
 
         private async UniTask Play(VideoPlayer vp, int timevideo)
         {
+            if (_musicManager.IsPlaying)
+                _musicManager.Stop();
             Debug.Log("Старт видео " + vp);
             _current = vp;
             _current.gameObject.SetActive(true);
