@@ -57,6 +57,7 @@ namespace Gameplay.Village
             if (!isActive) return;
             _houseMenuRectTransform.position = _rectTransform.position;
             _houseMenu.House = this;
+            _houseMenu.InitSkill();
             _houseMenu.gameObject.SetActive(true);
         }
     }

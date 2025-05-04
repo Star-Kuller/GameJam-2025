@@ -17,7 +17,9 @@ namespace Gameplay.Player
         public int MaxHealth => maxHealth;
         public int MaxAttention => maxAttention;
         public int TargetItemCount => targetItemCount;
-        
+
+        public PlayerSkillBase Skill => skill;
+
         public EnemyEffect GetEnemyEffect(EnemyType type)
         {
             foreach (var effect in enemyEffects)

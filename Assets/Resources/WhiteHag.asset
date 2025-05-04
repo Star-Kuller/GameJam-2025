@@ -16,7 +16,7 @@ MonoBehaviour:
   maxHealth: 33
   maxAttention: 100
   targetItemCount: 11
-  skill: {fileID: 0}
+  skill: {fileID: 11400000, guid: dedef8cecd50b9745a7612f48e481e42, type: 2}
   enemyEffects:
   - type: 0
     items: 0

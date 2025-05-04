@@ -10,12 +10,16 @@ namespace Gameplay.Village
 {
     public class HouseMenu : MonoBehaviour
     {
+        [SerializeField] private Image skillResult;
         [SerializeField] private Button visitButton;
+        [SerializeField] private Button skillButton;
+        [SerializeField] private Sprite disabledSprite;
         private PlayerService _playerService;
         private DialogueView _dialogue;
         private VisitCounter _visitCounter;
         private GameStateMachine _gameState;
         private HouseManager _houseManager;
+        private int _skillUseCounter;
         public House House { get; set; }
 
         [Inject]
@@ -28,6 +32,7 @@ namespace Gameplay.Village
             _gameState = gameStateMachine;
             _houseManager = houseManager;
             visitButton.onClick.AddListener(OnVisitClick);
+            skillButton.onClick.AddListener(OnSkillClick);
         }
         
         public void OnLeaveClick()
@@ -53,14 +58,48 @@ namespace Gameplay.Village
             if(gameObject.IsDestroyed()) return;
             gameObject.SetActive(false);
             _visitCounter.Increment();
+            
             if (evolve == Evolve.WhiteHag && _playerService.Items >= _playerService.CurrentEvolve.TargetItemCount)
                 _houseManager.SetActiveOnlyHeadman();
+            
             await _playerService.VisitHome(House.Villager);
         }
         
         public void OnSkillClick()
         {
-            
+            _skillUseCounter++;
+            var skill = _playerService.CurrentEvolve.Skill;
+            skillButton.interactable = false;
+            skillButton.image.sprite = skill.SpritePressed;
+            skill.UseEffect(House, this);
+        }
+
+        public void ShowSkillResult(Sprite sprite)
+        {
+            skillResult.sprite = sprite;
+            skillResult.gameObject.SetActive(true);
+        }
+        
+        public void InitSkill()
+        {
+            var skill = _playerService.CurrentEvolve.Skill;
+            skillResult.gameObject.SetActive(false);
+            if (skill != null && _skillUseCounter < skill.UsageLimit)
+            {
+                skillButton.image.sprite = skill.Sprite;
+                skillButton.spriteState = new SpriteState
+                {
+                    highlightedSprite = skill.SpriteHighlight,
+                    pressedSprite = skill.SpritePressed
+                };
+                skillButton.interactable = true;
+            }
+            else
+            {
+                skillButton.image.sprite = skill == null ? disabledSprite : skill.SpritePressed;
+                skillButton.interactable = false;
+            }
+                
         }
     }
 }
