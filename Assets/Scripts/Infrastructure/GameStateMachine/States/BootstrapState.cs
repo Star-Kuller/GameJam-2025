@@ -35,9 +35,9 @@ namespace Infrastructure.States
                 case "Menu":
                     await _stateMachine.Enter<MenuState>();
                     return;
-                case "End":
-                    await _stateMachine.Enter<WinEndingState>();
-                    return;
+                //case "End":
+                    //await _stateMachine.Enter<WinEndingState>();
+                    //return;
             }
 #endif
             await _stateMachine.Enter<MenuState>();

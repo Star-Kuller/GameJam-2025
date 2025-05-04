@@ -14,6 +14,7 @@ using Zenject;
 public class StartButtonHandler : MonoBehaviour
 {
     [SerializeField] private Button startButton;
+    [SerializeField] private Button nextButton;
     [SerializeField] private VideoPlayer introPlayer;
     [SerializeField] private RawImage introDisplay;
     private GameStateMachine _stateMachine;
@@ -32,6 +33,7 @@ public class StartButtonHandler : MonoBehaviour
         introPlayer.playOnAwake = false;
         introPlayer.isLooping = false;
         startButton.onClick.AddListener(OnStartClicked);
+        nextButton.onClick.AddListener(OnNextClicked);
     }
 
     private async void OnStartClicked()
@@ -42,8 +44,15 @@ public class StartButtonHandler : MonoBehaviour
         introDisplay.gameObject.SetActive(true);
         introPlayer.Play();
 
-        await UniTask.WaitUntil(() => !introPlayer.isPlaying);
+        //await UniTask.WaitUntil(() => !introPlayer.isPlaying);
+        await UniTask.Delay(51000);
 
+        await _stateMachine.Enter<VillageState>();
+    }
+
+    private async void OnNextClicked()
+    {
+        
         await _stateMachine.Enter<VillageState>();
     }
 }
