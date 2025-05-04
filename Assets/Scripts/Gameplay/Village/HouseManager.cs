@@ -9,15 +9,16 @@ namespace Gameplay.Village
     {
         [SerializeField] private House[] houses;
         [SerializeField] private EnemyGeneratorProfile generatorProfile;
+        private HouseMenu _houseMenu;
         private EnemyGenerator _enemyGenerator;
         private PlayerService _playerService;
-        
 
         [Inject]
-        public void Constructor(PlayerService playerService, EnemyGenerator enemyGenerator)
+        public void Constructor(PlayerService playerService, EnemyGenerator enemyGenerator, HouseMenu houseMenu)
         {
             _enemyGenerator = enemyGenerator;
             _playerService = playerService;
+            _houseMenu = houseMenu;
         }
 
         public void InitializeHouses()
@@ -31,11 +32,11 @@ namespace Gameplay.Village
                 
                 if (house.IsHeadman)
                 {
-                    house.Initialize(active && HaveEnoughItems);
+                    house.Initialize(active && HaveEnoughItems, _houseMenu);
                 }
                 else
                 {
-                    house.Initialize(active);
+                    house.Initialize(active, _houseMenu);
                     if (active) 
                         house.Villager = enemies.Pop();
                 }

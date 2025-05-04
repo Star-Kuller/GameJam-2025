@@ -21,7 +21,7 @@ namespace Infrastructure.States
         public async UniTask OnEnter()
         {
             Debug.Log("Инициализация игры...");
-            _playerService.ChangeEvolve(Evolve.Igosha);
+            _playerService.Reset();
 #if UNITY_EDITOR
             var currentScene = SceneManager.GetActiveScene();
             switch (currentScene.name)

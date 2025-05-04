@@ -23,7 +23,7 @@ namespace Gameplay
             await Play(winPlayer);
         }
 
-        public async UniTask PlayHP()
+        public async UniTask PlayHp()
         {
             await Play(loseHpPlayer);
         }

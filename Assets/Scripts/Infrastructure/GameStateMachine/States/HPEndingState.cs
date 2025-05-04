@@ -28,10 +28,10 @@ namespace Infrastructure.States
             if (endingsManager == null)
                 throw new Exception("EndingsManager not found in EndingsScene!");
 
-            await endingsManager.PlayHP();
+            await endingsManager.PlayHp();
 
 
-            await _gameStateMachine.Enter<MenuState>();
+            await _gameStateMachine.Enter<BootstrapState>();
         }
     }
 }

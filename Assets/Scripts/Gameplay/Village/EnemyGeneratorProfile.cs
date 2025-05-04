@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Gameplay.Village
 {
-    [CreateAssetMenu(fileName = "EnemyGenerator", menuName = "Player/Profile", order = 0)]
+    [CreateAssetMenu(fileName = "EnemyGeneratorProfile", menuName = "EnemyGenerator/Profile", order = 0)]
     public class EnemyGeneratorProfile : ScriptableObject
     {
         [SerializeField] private EnemyRules[] rulesList;
