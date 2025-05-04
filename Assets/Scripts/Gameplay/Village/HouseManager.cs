@@ -43,6 +43,14 @@ namespace Gameplay.Village
             }
         }
 
+        public void SetActiveOnlyHeadman()
+        {
+            foreach (var house in houses)
+            {
+                house.Initialize(house.IsHeadman, _houseMenu);
+            }
+        }
+
         private bool HaveEnoughItems => _playerService.Items >= _playerService.CurrentEvolve.TargetItemCount;
     }
 }
