@@ -22,6 +22,7 @@ namespace Infrastructure.States
         {
             Debug.Log("Инициализация игры...");
             _playerService.Reset();
+            _playerService.ChangeEvolve(Evolve.WhiteHag);
 #if UNITY_EDITOR
             var currentScene = SceneManager.GetActiveScene();
             switch (currentScene.name)

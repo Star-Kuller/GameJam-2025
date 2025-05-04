@@ -1,58 +1,56 @@
-using System;
 using Cysharp.Threading.Tasks;
-using Gameplay;
-using Gameplay.Player;
 using Infrastructure;
 using Infrastructure.States;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using Zenject;
 
-public class StartButtonHandler : MonoBehaviour
+namespace Gameplay.Menu
 {
-    [SerializeField] private Button startButton;
-    [SerializeField] private Button nextButton;
-    [SerializeField] private VideoPlayer introPlayer;
-    [SerializeField] private RawImage introDisplay;
-    private GameStateMachine _stateMachine;
-    private MusicManager _musicManager;
-
-    [Inject]
-    public void Construct(GameStateMachine stateMachine, MusicManager musicManager)
+    public class StartButtonHandler : MonoBehaviour
     {
-        _stateMachine = stateMachine;
-        _musicManager = musicManager;
-    }
+        [SerializeField] private Button startButton;
+        [SerializeField] private Button nextButton;
+        [SerializeField] private VideoPlayer introPlayer;
+        [SerializeField] private RawImage introDisplay;
+        private GameStateMachine _stateMachine;
+        private MusicManager _musicManager;
 
-    void Start()
-    {
-        introDisplay.gameObject.SetActive(false);
-        introPlayer.playOnAwake = false;
-        introPlayer.isLooping = false;
-        startButton.onClick.AddListener(OnStartClicked);
-        nextButton.onClick.AddListener(OnNextClicked);
-    }
+        [Inject]
+        public void Construct(GameStateMachine stateMachine, MusicManager musicManager)
+        {
+            _stateMachine = stateMachine;
+            _musicManager = musicManager;
+        }
 
-    private async void OnStartClicked()
-    {
-        if (_musicManager.IsPlaying)
-            _musicManager.Stop();
+        void Start()
+        {
+            introDisplay.gameObject.SetActive(false);
+            introPlayer.playOnAwake = false;
+            introPlayer.isLooping = false;
+            startButton.onClick.AddListener(OnStartClicked);
+            nextButton.onClick.AddListener(OnNextClicked);
+        }
 
-        introDisplay.gameObject.SetActive(true);
-        introPlayer.Play();
+        private async void OnStartClicked()
+        {
+            if (_musicManager.IsPlaying)
+                _musicManager.Stop();
 
-        //await UniTask.WaitUntil(() => !introPlayer.isPlaying);
-        await UniTask.Delay(51000);
+            introDisplay.gameObject.SetActive(true);
+            introPlayer.Play();
 
-        await _stateMachine.Enter<VillageState>();
-    }
+            //await UniTask.WaitUntil(() => !introPlayer.isPlaying);
+            await UniTask.Delay(51000);
 
-    private async void OnNextClicked()
-    {
+            await _stateMachine.Enter<VillageState>();
+        }
+
+        private async void OnNextClicked()
+        {
         
-        await _stateMachine.Enter<VillageState>();
+            await _stateMachine.Enter<VillageState>();
+        }
     }
 }
