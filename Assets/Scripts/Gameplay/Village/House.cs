@@ -12,12 +12,15 @@ namespace Gameplay.Village
         [SerializeField] private EnemyType villager;
         [SerializeField] private bool isHeadman;
         [SerializeField] private Evolve[] availableFor;
-
+        [SerializeField] private bool isActive;
+        
         [SerializeField] private Sprite activeView;
         [SerializeField] private Sprite deactivateView;
 
         private Image _image;
-        private bool _isActive;
+        private HouseMenu _houseMenu;
+        private RectTransform _rectTransform;
+        private RectTransform _houseMenuRectTransform;
         
         public EnemyType Villager
         {
@@ -25,20 +28,36 @@ namespace Gameplay.Village
             set => villager = value;
         }
 
+        public bool IsActive
+        {
+            get => isActive;
+            set
+            {
+                isActive = value;
+                if(_image != null) 
+                    _image.sprite = isActive ? activeView : deactivateView;
+            }
+        }
+
         public IReadOnlyCollection<Evolve> AvailableFor => availableFor;
         public bool IsHeadman => isHeadman;
         
-        public void Initialize(bool active)
+        public void Initialize(bool active, HouseMenu houseMenu)
         {
             _image = GetComponent<Image>()
                      ?? gameObject.AddComponent<Image>();
-            _isActive = active;
-            _image.sprite = _isActive ? activeView : deactivateView;
+            IsActive = active;
+            _houseMenu = houseMenu;
+            _houseMenuRectTransform = _houseMenu.GetComponent<RectTransform>();
+            _rectTransform = GetComponent<RectTransform>();
         }
 
         public void OnHouseClick()
         {
-            
+            if (!isActive) return;
+            _houseMenuRectTransform.position = _rectTransform.position;
+            _houseMenu.House = this;
+            _houseMenu.gameObject.SetActive(true);
         }
     }
 }

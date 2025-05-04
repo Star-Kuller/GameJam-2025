@@ -3,7 +3,6 @@ using Cysharp.Threading.Tasks;
 using Infrastructure;
 using Infrastructure.States;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Gameplay.Player
 {
@@ -26,7 +25,7 @@ namespace Gameplay.Player
         public int Attention
         {
             get => _attention;
-            private set => _attention = value > 100 ? 100 : value;
+            private set => _attention = value > CurrentEvolve.MaxAttention ? CurrentEvolve.MaxAttention : value;
         }
 
         public PlayerService(GameStateMachine gameStateMachine)
@@ -38,9 +37,11 @@ namespace Gameplay.Player
         {
             var effect = CurrentEvolve.GetEnemyEffect(type);
             Health -= effect.damage;
+            if (Health == 0)
+                await _stateMachine.Enter<HpEndingState>();
             Attention += effect.attention;
-            if (Health <= 0 || Attention >= CurrentEvolve.MaxAttention)
-                await _stateMachine.Enter<DeadState>();
+            if (Attention == CurrentEvolve.MaxAttention)
+                await _stateMachine.Enter<HpEndingState>();
             Items += effect.items;
         }
 

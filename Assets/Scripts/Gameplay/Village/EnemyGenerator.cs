@@ -9,7 +9,7 @@ namespace Gameplay.Village
     public class EnemyGenerator
     {
         private readonly EnemyType[] _allEnemies = (EnemyType[])Enum.GetValues(typeof(EnemyType));
-        private static int Rand(int range) => Random.Range(0, range);
+        private static int Rand(int range) => Random.Range(0, range-1);
 
         public Stack<EnemyType> Generate(EnemyRules rules)
         {
