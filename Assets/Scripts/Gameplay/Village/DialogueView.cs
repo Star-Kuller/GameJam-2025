@@ -19,6 +19,8 @@ namespace Gameplay.Village
         [SerializeField] private TMP_Text text;
         [SerializeField] private TMP_Text result;
         [SerializeField] private AudioSource audioSource;
+        [SerializeField] private Color colorSucssesful;
+        [SerializeField] private Color colorFailed;
         private PlayerService _playerService;
         
         public void OnValidate()
@@ -42,6 +44,7 @@ namespace Gameplay.Village
             portrait.sprite = currentDialogues.Portrait;
             text.text = dialogue.Text;
             result.text = currentDialogues.ResultText;
+            result.color = currentDialogues.ResultText.Contains("не") ? colorFailed : colorSucssesful;
             audioSource.clip = dialogue.Voice;
             audioSource.Play();
             await UniTask.WaitUntil(() => KeyWasPressed);
