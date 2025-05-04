@@ -42,7 +42,7 @@ public class StartButtonHandler : MonoBehaviour
     {
         if (_musicManager.IsPlaying)
             _musicManager.Stop();
-
+        exitButton.gameObject.SetActive(false );
         introDisplay.gameObject.SetActive(true);
         introPlayer.Play();
 
