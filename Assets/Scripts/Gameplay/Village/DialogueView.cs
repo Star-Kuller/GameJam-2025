@@ -18,12 +18,12 @@ namespace Gameplay.Village
         [SerializeField] private Image portrait;
         [SerializeField] private TMP_Text text;
         [SerializeField] private TMP_Text result;
-        [SerializeField] private AudioSource audio;
+        [SerializeField] private AudioSource audioSource;
         private PlayerService _playerService;
         
         public void OnValidate()
         {
-            audio = GetComponent<AudioSource>();
+            audioSource = GetComponent<AudioSource>();
         }
 
         public async UniTask SayEnemy(Evolve evolve, EnemyType enemyType)
@@ -47,10 +47,10 @@ namespace Gameplay.Village
             portrait.sprite = currentDialogues.Portrait;
             text.text = dialogue.Text;
             result.text = currentDialogues.ResultText;
-            audio.clip = dialogue.Voice;
-            audio.Play();
+            audioSource.clip = dialogue.Voice;
+            audioSource.Play();
             await UniTask.WaitUntil(() => KeyWasPressed);
-            audio.Stop();
+            audioSource.Stop();
             gameObject.SetActive(false);
         }
 

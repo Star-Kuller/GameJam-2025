@@ -808,7 +808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &549649052
 RectTransform:
   m_ObjectHideFlags: 0
@@ -967,6 +967,7 @@ MonoBehaviour:
   houseManager: {fileID: 1996831702}
   houseMenu: {fileID: 783603502}
   dialogueView: {fileID: 915613671}
+  visitCounter: {fileID: 1996831703}
 --- !u!4 &665719299
 Transform:
   m_ObjectHideFlags: 0
@@ -1063,19 +1064,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 677029971}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 783603502}
-        m_TargetAssemblyTypeName: Gameplay.Village.HouseMenu, Assembly-CSharp
-        m_MethodName: OnVisitClick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &677029971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1738,7 +1727,7 @@ MonoBehaviour:
   portrait: {fileID: 1979450463}
   text: {fileID: 170412371}
   result: {fileID: 2007557763}
-  audio: {fileID: 915613672}
+  audioSource: {fileID: 915613672}
 --- !u!82 &915613672
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3084,6 +3073,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1996831701}
   - component: {fileID: 1996831702}
+  - component: {fileID: 1996831703}
   m_Layer: 5
   m_Name: Houses
   m_TagString: Untagged
@@ -3140,6 +3130,21 @@ MonoBehaviour:
   - {fileID: 1226299353}
   - {fileID: 1735525827}
   generatorProfile: {fileID: 11400000, guid: 7c2aad082db88714596cc2d84753bfca, type: 2}
+--- !u!114 &1996831703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996831700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e743e3e1bc144288ae8b4d6a902c4fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toForrestButton: {fileID: 549649051}
+  visitCount: 0
+  needToReturnVisits: 3
 --- !u!1 &2007557761
 GameObject:
   m_ObjectHideFlags: 0

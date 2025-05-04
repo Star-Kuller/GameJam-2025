@@ -34,7 +34,7 @@ namespace Infrastructure.States
             await endingsManager.PlayWin();
 
 
-            await _gameStateMachine.Enter<MenuState>();
+            await _gameStateMachine.Enter<BootstrapState>();
         }
     }
 }

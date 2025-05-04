@@ -41,7 +41,7 @@ namespace Gameplay.Player
                 await _stateMachine.Enter<HpEndingState>();
             Attention += effect.attention;
             if (Attention == CurrentEvolve.MaxAttention)
-                await _stateMachine.Enter<HpEndingState>();
+                await _stateMachine.Enter<HeadEndingState>();
             Items += effect.items;
         }
 
@@ -59,6 +59,15 @@ namespace Gameplay.Player
             Items = 0;
 
             Debug.Log($"Игрок перешёл на этап {evolve} HP: {Health/MaxHealth} Внимание: {Attention/CurrentEvolve.MaxAttention}");
+        }
+
+        public void Reset()
+        {
+            CurrentEvolve = Resources.Load<PlayerEvolve>("Igosha");
+            Health = CurrentEvolve.MaxHealth;
+            Items = 0;
+            Attention = 0;
+            MaxHealth = CurrentEvolve.MaxHealth;
         }
     }
 }

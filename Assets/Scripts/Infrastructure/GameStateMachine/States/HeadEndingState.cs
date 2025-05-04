@@ -29,7 +29,7 @@ namespace Infrastructure.States
 
             await endingsManager.PlayHead();
 
-            await _gameStateMachine.Enter<MenuState>();
+            await _gameStateMachine.Enter<BootstrapState>();
         }
     }
 }
