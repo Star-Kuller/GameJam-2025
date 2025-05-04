@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7558292f59bb99b4e9fb12898be1dfa8
+guid: aa5da3fd17ae05648bfffeae945bc056
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7676581152361979725
-    second: 012 Quest-OldMan Boxes (240-86)_0
+      213: 3436088345610095449
+    second: 020 Back4_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 012 Quest-OldMan Boxes (240-86)_0
+      name: 020 Back4_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 240
-        height: 86
+        width: 514
+        height: 141
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 13, y: 13, z: 13, w: 13}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3b0610c3d1e477590800000000000000
-      internalID: -7676581152361979725
+      spriteID: 95b03f825207faf20800000000000000
+      internalID: 3436088345610095449
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b0801e6191a5201428818f277bf77423
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      012 Quest-OldMan Boxes (240-86)_0: -7676581152361979725
+      020 Back4_0: 3436088345610095449
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
